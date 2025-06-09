@@ -1,12 +1,12 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
 
-const App = () => {
+function App() {
   return (
     <div className="App">
-    
+      <p> Hello </p>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
