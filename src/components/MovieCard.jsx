@@ -1,11 +1,9 @@
-function App() {
+export default function MovieCard(props) {
   return (
-    <div className="MovieCard">
-      <h2> Movie title </h2>
-      <p> Movie poster image </p>
-      <p> Movie vote average </p>
+    <div>
+      <h2>Movie title: {props.title}</h2>
+      <p>Movie poster image: {props.posterPath}</p>
+      <p>Movie vote average: {props.voteAverage}</p>
     </div>
   );
 }
-
-export default App;
