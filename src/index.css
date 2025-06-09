@@ -17,3 +17,57 @@ button:hover {
   background-color: #777;
   color: white;
 }
+
+header {
+  background-color: #e4cef57b;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  position: sticky;
+  padding: 20px 40px;
+  margin-bottom: 80px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0px;
+  height: 30px;
+  padding: 15px 10px 15px 10px;
+  width: 100%;
+  background-color: #e4cef57b;
+  text-align: center;
+}
+
+.MovieList {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.MovieCard {
+  margin: 10px 10px;
+  padding: 10px 10px 10px 10px;
+  border: 2px solid #e7d6ee72;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.MovieCard:hover {
+  background: #f1ecf3;
+  border: 2px solid #e6cef5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+#movieTitle {
+  text-shadow: 2px 2px 0 #cdc8d6;
+  color: #200f43;
+}
