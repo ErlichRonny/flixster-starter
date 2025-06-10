@@ -2,32 +2,52 @@ import { useEffect, useState } from "react";
 
 import MovieCard from "./MovieCard.jsx";
 
-export default function MovieList({ pageNumber, setPageNumber }) {
+export default function MovieList({
+  pageNumber,
+  setPageNumber,
+  searchQuery,
+  isSearching,
+}) {
   const [movies, setMovies] = useState([]);
+  const [totalPages, setTotalPages] = useState(0);
 
   const incrementPage = () => {
     setPageNumber((pageNumber) => pageNumber + 1);
   };
 
+  // TODO: if no more movies, add a message indicating that
+
   useEffect(() => {
     const fetchData = async (pageNumber) => {
       try {
         const apiKey = import.meta.env.VITE_APP_API_KEY;
-        const response = await fetch(
-          `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${pageNumber}`,
-          {
-            method: "GET",
-            headers: {
-              accept: "application/json",
-              Authorization: `Bearer ${apiKey}`,
-            },
-          }
-        );
+
+        let url;
+        if (isSearching && searchQuery) {
+          url = `https://api.themoviedb.org/3/${encodeURIComponent(searchQuery)}/now_playing?language=en-US&page=${pageNumber}`;
+        } else {
+          url = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${pageNumber}`;
+        }
+
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${apiKey}`,
+          },
+        });
         if (!response.ok) {
           throw new Error("Failed to fetch movie data");
         }
         const data = await response.json();
-        setMovies(data.results);
+
+        setTotalPages(data.total_pages);
+
+        if (pageNumber === 1) {
+          setMovies(data.results);
+        } else {
+          setMovies((prevMovies) => [...prevMovies, ...data.results]);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -35,14 +55,14 @@ export default function MovieList({ pageNumber, setPageNumber }) {
     fetchData(pageNumber);
   }, [pageNumber]);
 
+  useEffect(() => {
+    setMovies([]);
+  }, [isSearching, searchQuery]);
+
   return (
     <>
-      <div className="loadBtn">
-        <button type="button" onClick={incrementPage}>
-          Load More
-        </button>
-      </div>
-
+      {isSearching && <h3> Search results for : {searchQuery}</h3>}
+      {!isSearching && <h3> Now playing: </h3>}¸
       <div className="MovieList">
         {movies.map((element) => (
           <div className="MovieCard" key={element.id}>
@@ -53,6 +73,18 @@ export default function MovieList({ pageNumber, setPageNumber }) {
             />
           </div>
         ))}
+        {pageNumber < totalPages && (
+          <div className="loadBtn">
+            <button type="button" onClick={incrementPage}>
+              Load More
+            </button>
+          </div>
+        )}
+        {pageNumber == totalPages && (
+          <div className="no-results">
+            <p> No movies found </p>
+          </div>
+        )}
       </div>
     </>
   );

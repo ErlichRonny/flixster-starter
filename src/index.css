@@ -85,3 +85,8 @@ footer {
   width: auto;
   height: 300px;
 }
+
+#searchBtn{
+  background-color:#bfbfc1;
+  margin-left: 5px;
+}
