@@ -15,16 +15,17 @@ export default function MovieList({
     setPageNumber((pageNumber) => pageNumber + 1);
   };
 
-  // TODO: if no more movies, add a message indicating that
-
   useEffect(() => {
-    const fetchData = async (pageNumber) => {
+    const fetchData = async () => {
       try {
         const apiKey = import.meta.env.VITE_APP_API_KEY;
 
         let url;
         if (isSearching && searchQuery) {
-          url = `https://api.themoviedb.org/3/${encodeURIComponent(searchQuery)}/now_playing?language=en-US&page=${pageNumber}`;
+          url = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
+            searchQuery
+          )}&include_adult=false&language=en-US&page=1`;
+          console.log(url);
         } else {
           url = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${pageNumber}`;
         }
@@ -53,16 +54,17 @@ export default function MovieList({
       }
     };
     fetchData(pageNumber);
-  }, [pageNumber]);
+  }, [pageNumber, searchQuery, isSearching]);
 
   useEffect(() => {
     setMovies([]);
-  }, [isSearching, searchQuery]);
+    setPageNumber(1);
+  }, [isSearching, searchQuery, setPageNumber]);
 
   return (
     <>
       {isSearching && <h3> Search results for : {searchQuery}</h3>}
-      {!isSearching && <h3> Now playing: </h3>}¸
+      {!isSearching && <h3> Now playing: </h3>}
       <div className="MovieList">
         {movies.map((element) => (
           <div className="MovieCard" key={element.id}>

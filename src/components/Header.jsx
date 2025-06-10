@@ -1,10 +1,15 @@
 import { useState } from "react";
+
 export default function Header({ onSearch, onClear }) {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const handleSearchChange = (event) => {
+  const handleInputChange = (event) => {
     setSearchQuery(event.target.value);
   };
+
+  const handleSearch = () => {
+    onSearch(searchQuery.trim());
+  }
 
   const handleClear = () => {
     setSearchQuery("");
@@ -17,10 +22,10 @@ export default function Header({ onSearch, onClear }) {
         <input
           type="search"
           value={searchQuery}
-          onChange={handleSearchChange}
+          onChange={handleInputChange}
           placeholder="Search movies..."
         />
-        <button id="searchBtn" onClick={handleSearchChange}>
+        <button id="searchBtn" onClick={handleSearch}>
           {" "}
           🔍{" "}
         </button>

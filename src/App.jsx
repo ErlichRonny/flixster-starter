@@ -10,17 +10,14 @@ function App() {
   const [isSearching, setIsSearching] = useState(false);
 
   const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value);
+    setSearchQuery(event);
     setPageNumber(1);
-    if (searchQuery) {
-      setIsSearching(true);
-    } else {
-      setIsSearching(false);
-    }
+    setIsSearching(true);
   };
 
   const clearSearch = () => {
     setSearchQuery("");
+    setIsSearching(false);
     setPageNumber(1);
   };
 
