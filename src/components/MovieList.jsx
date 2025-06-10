@@ -6,13 +6,28 @@ export default function MovieList({
   pageNumber,
   setPageNumber,
   searchQuery,
+  setSearchQuery,
   isSearching,
+  setIsSearching,
 }) {
   const [movies, setMovies] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
+  const [view, setCurrentView] = useState("nowPlaying");
 
   const incrementPage = () => {
     setPageNumber((pageNumber) => pageNumber + 1);
+  };
+
+  const toggleViewChange = (view) => {
+    setCurrentView(view);
+    setMovies([]);
+    setPageNumber(1);
+        if (view == "nowPlaying") {
+        setIsSearching(false);
+        setSearchQuery("");
+        } else {
+        setIsSearching(true);
+        }
   };
 
   useEffect(() => {
@@ -61,10 +76,26 @@ export default function MovieList({
     setPageNumber(1);
   }, [isSearching, searchQuery, setPageNumber]);
 
+  useEffect(() => {
+    if (view == "nowPlaying" && !isSearching){
+        fetchData();
+    }
+  }, [view]);
+
   return (
     <>
-      {isSearching && <h3> Search results for : {searchQuery}</h3>}
-      {!isSearching && <h3> Now playing: </h3>}
+      <button type="button" onClick={toggleViewChange("nowPlaying")}>
+        {" "}
+        Now playing{" "}
+      </button>
+      <button type="button" onClick={toggleViewChange("search")}>
+        {" "}
+        Search Results{" "}
+      </button>
+
+      {(view =="search") && <h3> Search results for : {searchQuery}</h3>}
+      {(view == "nowPlaying") && <h3> Now playing: </h3>}
+
       <div className="MovieList">
         {movies.map((element) => (
           <div className="MovieCard" key={element.id}>

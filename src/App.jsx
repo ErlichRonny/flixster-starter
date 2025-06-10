@@ -31,7 +31,9 @@ function App() {
           pageNumber={pageNumber}
           setPageNumber={setPageNumber}
           searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
           isSearching={isSearching}
+          setIsSearching={setIsSearching}
         />
       </main>
       {/* <footer></footer> */}
