@@ -71,3 +71,8 @@ footer {
   text-shadow: 2px 2px 0 #cdc8d6;
   color: #200f43;
 }
+
+.header {
+  display: flex;
+  flex-direction: column;
+}
