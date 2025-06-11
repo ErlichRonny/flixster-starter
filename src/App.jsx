@@ -54,7 +54,7 @@ function App() {
           sortCriteria={sortCriteria}
         />
       </main>
-      {/* <footer></footer> */}
+      <footer></footer>
     </div>
   );
 }
