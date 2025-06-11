@@ -50,7 +50,6 @@ footer {
   justify-content: center;
   align-items: center;
   gap: 10px;
-
 }
 
 .MovieCard {
@@ -84,7 +83,34 @@ footer {
   height: 300px;
 }
 
+.modalImg {
+  height: auto;
+  width: 300px;
+
+}
+
 #searchBtn {
   background-color: #bfbfc1;
   margin-left: 5px;
+}
+
+.movieModal {
+  position: fixed;
+  top: 15%;
+  left: 25%;
+  height: 70%;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 40px;
+}
+
+#closeModalBtn {
 }

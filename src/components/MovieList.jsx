@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import MovieCard from "./MovieCard.jsx";
+import MovieModal from "./MovieModal.jsx";
 
 export default function MovieList({
   pageNumber,
@@ -13,6 +14,15 @@ export default function MovieList({
   const [movies, setMovies] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
   const [view, setCurrentView] = useState("nowPlaying");
+  const [selectedMovie, setSelectedMovie] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [genres, setGenres] = useState([]);
+  const [genreMapping, setGenreMapping] = useState({});
+
+  const handleMovieClick = (title, img, releaseDate, overview, genres) => {
+    setSelectedMovie([title, img, releaseDate, overview, genres]);
+    setIsModalOpen(true);
+  };
 
   const incrementPage = () => {
     setPageNumber((pageNumber) => pageNumber + 1);
@@ -32,6 +42,49 @@ export default function MovieList({
     }
   };
 
+  const getGenres = (genreIds) => {
+    let genreList = [];
+
+    genreIds.forEach((id) => {
+      genreList.push(" " + genreMapping[id]);
+    });
+    return genreList;
+  };
+
+  useEffect(() => {
+    const fetchGenres = async () => {
+      try {
+        const apiKey = import.meta.env.VITE_APP_API_KEY;
+
+        const response = await fetch(
+          "https://api.themoviedb.org/3/genre/movie/list?language=en",
+          {
+            method: "GET",
+            headers: {
+              accept: "application/json",
+              Authorization: `Bearer ${apiKey}`,
+            },
+          }
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch movie data");
+        }
+        const data = await response.json();
+
+        let genreDict = {};
+        data["genres"].forEach((genre) => {
+          genreDict[genre.id] = genre.name;
+        });
+
+        setGenreMapping(genreDict);
+        setGenres(data["genres"]);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchGenres();
+  }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -45,7 +98,6 @@ export default function MovieList({
           url = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
             searchQuery
           )}&include_adult=false&language=en-US&page=${pageNumber}`;
-          console.log(url);
         } else {
           url = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${pageNumber}`;
         }
@@ -94,13 +146,23 @@ export default function MovieList({
         {" "}
         Search Results{" "}
       </button>
-
       {view === "search" && <h3> Search results for : {searchQuery}</h3>}
       {view === "nowPlaying" && <h3> Now playing: </h3>}
-
       <div className="MovieList">
         {movies.map((element) => (
-          <div className="MovieCard" key={element.id}>
+          <div
+            className="MovieCard"
+            key={element.id}
+            onClick={() =>
+              handleMovieClick(
+                element.title,
+                `https://image.tmdb.org/t/p/w500${element.poster_path}`,
+                element.release_date,
+                element.overview,
+                getGenres(element.genre_ids)
+              )
+            }
+          >
             <MovieCard
               title={element.title}
               posterPath={`https://image.tmdb.org/t/p/w500${element.poster_path}`}
@@ -109,6 +171,12 @@ export default function MovieList({
           </div>
         ))}
       </div>
+      {isModalOpen === true && (
+        <MovieModal
+          onClose={() => setIsModalOpen(false)}
+          movie={selectedMovie}
+        ></MovieModal>
+      )}
       {pageNumber < totalPages && !isSearching && (
         <div className="loadBtn">
           <button type="button" onClick={incrementPage}>
