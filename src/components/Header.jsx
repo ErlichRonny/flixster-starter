@@ -7,6 +7,14 @@ export default function Header({ onSearch, onClear }) {
     setSearchQuery(event.target.value);
   };
 
+  const handleEnter = (event) => {
+    console.log(event);
+    if (event.key === "Enter") {
+      handleSearch();
+    } else if (event.key === "Backspace") {
+      handleClear();
+    }
+  };
   const handleSearch = () => {
     onSearch(searchQuery.trim());
   };
@@ -15,6 +23,7 @@ export default function Header({ onSearch, onClear }) {
     setSearchQuery("");
     onClear();
   };
+
   return (
     <>
       <style>
@@ -34,6 +43,7 @@ export default function Header({ onSearch, onClear }) {
             type="search"
             value={searchQuery}
             onChange={handleInputChange}
+            onKeyUp={(event) => handleEnter(event)}
             placeholder="Search movies..."
           />
           <button id="searchBtn" onClick={handleSearch}>
