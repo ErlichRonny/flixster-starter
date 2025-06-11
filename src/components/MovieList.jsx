@@ -10,7 +10,9 @@ export default function MovieList({
   setSearchQuery,
   isSearching,
   setIsSearching,
+  sortCriteria,
 }) {
+  const [originalMovies, setOriginalMovies] = useState([]);
   const [movies, setMovies] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
   const [view, setCurrentView] = useState("nowPlaying");
@@ -117,8 +119,10 @@ export default function MovieList({
         setTotalPages(data.total_pages);
 
         if (pageNumber === 1) {
+          setOriginalMovies(data.results);
           setMovies(data.results);
         } else {
+          setOriginalMovies((prevMovies) => [...prevMovies, ...data.results]);
           setMovies((prevMovies) => [...prevMovies, ...data.results]);
         }
       } catch (error) {
@@ -127,6 +131,29 @@ export default function MovieList({
     };
     fetchData(pageNumber);
   }, [pageNumber, searchQuery, isSearching]);
+
+  useEffect(() => {
+    let sortedMovies = originalMovies;
+    console.log(originalMovies);
+    if (sortCriteria === "no sort") {
+      setMovies(originalMovies);
+    } else if (sortCriteria === "Sort by title") {
+      sortedMovies = [...movies].sort((a, b) =>
+        a.title.toLowerCase().localeCompare(b.title.toLowerCase())
+      );
+      setMovies(sortedMovies);
+    } else if (sortCriteria === "Sort by release date") {
+      sortedMovies = [...movies].sort((a, b) =>
+        b.release_date.localeCompare(a.release_date)
+      );
+      setMovies(sortedMovies);
+    } else if (sortCriteria === "Sort by vote average") {
+      sortedMovies = [...movies].sort(
+        (a, b) => b.vote_average - a.vote_average
+      );
+      setMovies(sortedMovies);
+    }
+  }, [sortCriteria]);
 
   return (
     <>

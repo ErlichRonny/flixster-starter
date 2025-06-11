@@ -1,8 +1,54 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  background-color: rgb(255, 255, 255);
 }
+
+.netflix-stick{
+  width: 7vh;
+  height: 30vh;
+  background-color: #b1060f;
+  position: relative;
+}
+.netflix-stick:before {
+  content: "";
+  position: absolute;
+  width: 7vh;
+  height: 30vh;
+  background-color: #e50913;
+  transform: skew(20deg);
+  left: 5.5vh;
+  box-shadow: 0 0 2.5vh -1vh black;
+}
+.netflix-stick:after {
+  content: "";
+  position: absolute;
+  width: 7vh;
+  height: 30vh;
+  background-color: #b1060f;
+  left: 11vh;
+  z-index: -1;
+}
+.thing {
+  width: 7.5vh;
+  height: 2vh;
+  position: absolute;
+  background-color: black;
+  bottom: -1vh;
+  transform: rotateZ(-5deg);
+}
+.thing:before{
+  content: "";
+  width: 7.8vh;
+  height: 2vh;
+  position: absolute;
+  background-color: black;
+  bottom: -1vh;
+  transform: rotateZ(12deg);
+  left: 10.2vh;
+  
+}
+  
 
 button {
   background-color: #282c34;
@@ -58,6 +104,7 @@ footer {
   border: 2px solid #e7d6ee72;
   border-radius: 8px;
   cursor: pointer;
+  background-color: black;
   transition: box-shadow 0.2s;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
@@ -69,8 +116,12 @@ footer {
 }
 
 #movieTitle {
-  text-shadow: 2px 2px 0 #cdc8d6;
-  color: #200f43;
+  text-shadow: 2px 2px 0 #9d9db9;
+  color: #6d5e8f;
+}
+
+#movieVoteAverage {
+  color: white;
 }
 
 .header {
@@ -86,7 +137,6 @@ footer {
 .modalImg {
   height: auto;
   width: 300px;
-
 }
 
 #searchBtn {
