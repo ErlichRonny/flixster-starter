@@ -22,12 +22,14 @@ export default function MovieList({
     setCurrentView(view);
     setMovies([]);
     setPageNumber(1);
-        if (view == "nowPlaying") {
-        setIsSearching(false);
-        setSearchQuery("");
-        } else {
+    if (view == "nowPlaying") {
+      setIsSearching(false);
+      setSearchQuery("");
+    } else {
+      if (searchQuery) {
         setIsSearching(true);
-        }
+      }
+    }
   };
 
   useEffect(() => {
@@ -37,9 +39,12 @@ export default function MovieList({
 
         let url;
         if (isSearching && searchQuery) {
+          //   url = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
+          //     searchQuery
+          //   )}&include_adult=false&language=en-US&page=1`;
           url = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
             searchQuery
-          )}&include_adult=false&language=en-US&page=1`;
+          )}&include_adult=false&language=en-US&page=${pageNumber}`;
           console.log(url);
         } else {
           url = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${pageNumber}`;
@@ -71,30 +76,27 @@ export default function MovieList({
     fetchData(pageNumber);
   }, [pageNumber, searchQuery, isSearching]);
 
-  useEffect(() => {
-    setMovies([]);
-    setPageNumber(1);
-  }, [isSearching, searchQuery, setPageNumber]);
-
-  useEffect(() => {
-    if (view == "nowPlaying" && !isSearching){
-        fetchData();
-    }
-  }, [view]);
-
   return (
     <>
-      <button type="button" onClick={toggleViewChange("nowPlaying")}>
+      <button
+        type="button"
+        onClick={() => toggleViewChange("nowPlaying")}
+        className={view === "nowPlaying" ? "active" : ""}
+      >
         {" "}
         Now playing{" "}
       </button>
-      <button type="button" onClick={toggleViewChange("search")}>
+      <button
+        type="button"
+        onClick={() => toggleViewChange("search")}
+        className={view === "search" ? "active" : ""}
+      >
         {" "}
         Search Results{" "}
       </button>
 
-      {(view =="search") && <h3> Search results for : {searchQuery}</h3>}
-      {(view == "nowPlaying") && <h3> Now playing: </h3>}
+      {view === "search" && <h3> Search results for : {searchQuery}</h3>}
+      {view === "nowPlaying" && <h3> Now playing: </h3>}
 
       <div className="MovieList">
         {movies.map((element) => (
@@ -106,19 +108,19 @@ export default function MovieList({
             />
           </div>
         ))}
-        {pageNumber < totalPages && (
-          <div className="loadBtn">
-            <button type="button" onClick={incrementPage}>
-              Load More
-            </button>
-          </div>
-        )}
-        {pageNumber == totalPages && (
-          <div className="no-results">
-            <p> No movies found </p>
-          </div>
-        )}
       </div>
+      {pageNumber < totalPages && !isSearching && (
+        <div className="loadBtn">
+          <button type="button" onClick={incrementPage}>
+            Load More
+          </button>
+        </div>
+      )}
+      {pageNumber >= totalPages && movies.length === 0 && (
+        <div className="no-results">
+          <p> No movies found </p>
+        </div>
+      )}
     </>
   );
 }
