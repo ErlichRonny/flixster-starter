@@ -21,8 +21,8 @@ export default function MovieList({
   const [genres, setGenres] = useState([]);
   const [genreMapping, setGenreMapping] = useState({});
 
-  const handleMovieClick = (title, img, releaseDate, overview, genres) => {
-    setSelectedMovie([title, img, releaseDate, overview, genres]);
+  const handleMovieClick = (title, img, releaseDate, overview, genres, id) => {
+    setSelectedMovie([title, img, releaseDate, overview, genres, id]);
     setIsModalOpen(true);
   };
 
@@ -186,7 +186,8 @@ export default function MovieList({
                 `https://image.tmdb.org/t/p/w500${element.poster_path}`,
                 element.release_date,
                 element.overview,
-                getGenres(element.genre_ids)
+                getGenres(element.genre_ids),
+                element.id
               )
             }
           >
