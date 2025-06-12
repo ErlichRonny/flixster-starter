@@ -1,23 +1,35 @@
-import { useState } from "react";
-export default function MovieCard(props) {
-  const [checked, setChecked] = useState(false);
-  const [liked, setLiked] = useState(false);
-
+export default function MovieCard({
+  title,
+  posterPath,
+  voteAverage,
+  checked,
+  setChecked,
+  liked,
+  setLiked,
+}) {
   const handleCheckboxChange = () => {
-    setChecked(!checked);
+    checked.includes(title)
+      ? setChecked(checked.filter((movieTitle) => movieTitle !== title))
+      : setChecked([...checked, title]);
+
     console.log(checked);
   };
   const handleLike = (event) => {
+    console.log('handleliked called');
     event.stopPropagation();
-    liked ? setLiked(false) : setLiked(true);
+    liked.includes(title)
+      ? setLiked(liked.filter((movieTitle) => movieTitle !== title))
+      : setLiked([...liked, title]);
+    console.log(liked);
   };
+  
 
   return (
     <div>
-      <h2 id="movieTitle"> {props.title}</h2>
-      {checked && <p> ✅ </p>}
-      <img src={props.posterPath} className="movieImg" />
-      <p id="movieVoteAverage"> Vote average: {props.voteAverage}</p>
+      <h2 id="movieTitle"> {title}</h2>
+      {checked.includes(title) && <p> ✅ </p>}
+      <img src={posterPath} className="movieImg" />
+      <p id="movieVoteAverage"> Vote average: {voteAverage}</p>
       <div>
         <input
           type="checkbox"
@@ -31,7 +43,7 @@ export default function MovieCard(props) {
         </label>
       </div>
       <button type="button" className="likeButton" onClick={handleLike}>
-        {liked ? "❤️" : "♡"}
+        {liked.includes(title) ? "❤️" : "♡"}
       </button>
     </div>
   );

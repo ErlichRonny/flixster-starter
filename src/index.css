@@ -53,6 +53,7 @@ body {
   font-family: "Bebas Neue", sans-serif;
   font-weight: 400;
   font-style: normal;
+  font-size: 90px;
 }
 
 button {
@@ -143,6 +144,9 @@ footer {
   width: 300px;
 }
 
+.searchBar {
+}
+
 #searchBtn {
   background-color: #bfbfc1;
   margin-left: 5px;
@@ -172,3 +176,14 @@ footer {
 #watchedText {
   color: white;
 }
+
+.sidebarDiv {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+  background-color: white;
+}
+

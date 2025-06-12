@@ -33,7 +33,6 @@ export default function MovieModal({ onClose, movie }) {
             setTrailerKey(video.key);
           }
         });
-        console.log(data);
       } catch (error) {
         console.log(error);
       }

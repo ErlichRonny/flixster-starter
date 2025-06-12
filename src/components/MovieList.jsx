@@ -11,6 +11,10 @@ export default function MovieList({
   isSearching,
   setIsSearching,
   sortCriteria,
+  checked,
+  setChecked,
+  liked,
+  setLiked,
 }) {
   const [originalMovies, setOriginalMovies] = useState([]);
   const [movies, setMovies] = useState([]);
@@ -195,6 +199,10 @@ export default function MovieList({
               title={element.title}
               posterPath={`https://image.tmdb.org/t/p/w500${element.poster_path}`}
               voteAverage={element.vote_average}
+              checked={checked}
+              setChecked={setChecked}
+              liked={liked}
+              setLiked={setLiked}
             />
           </div>
         ))}
