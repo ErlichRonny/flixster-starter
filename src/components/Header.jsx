@@ -30,31 +30,35 @@ export default function Header({ onSearch, onClear }) {
         @import
         url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
       </style>
+      {/* Based on CodePen by hamdiye - https://codepen.io/hamdiye/pen/povPRQJ */}
       {/* <div class="netflix-stick">
         <div class="thing"></div>
-      </div> */}
+      </div>  */}
       <div className="header">
         <h2 id="websiteTitle" className="bebas-neue-regular">
           {" "}
           Flixster{" "}
         </h2>
         <div className="searchBar">
-          <input
-            type="search"
-            value={searchQuery}
-            onChange={handleInputChange}
-            onKeyUp={(event) => handleEnter(event)}
-            placeholder="Search movies..."
-          />
-          <button id="searchBtn" onClick={handleSearch}>
-            {" "}
-            🔍{" "}
-          </button>
-          {searchQuery && (
-            <button id="clearBtn" onClick={handleClear}>
-              Clear
+          <form>
+            <input
+              type="search"
+              value={searchQuery}
+              onChange={handleInputChange}
+              onKeyUp={(event) => handleEnter(event)}
+              placeholder="Search movies..."
+              class="input"
+            />
+            <button id="searchBtn" onClick={handleSearch}>
+              {" "}
+              🔍{" "}
             </button>
-          )}
+            {searchQuery && (
+              <button id="clearBtn" onClick={handleClear}>
+                Clear
+              </button>
+            )}
+          </form>
         </div>
       </div>
     </>

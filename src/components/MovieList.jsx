@@ -144,7 +144,6 @@ export default function MovieList({
 
   useEffect(() => {
     let sortedMovies = originalMovies;
-    console.log(originalMovies);
     if (sortCriteria === "no sort") {
       setMovies(originalMovies);
     } else if (sortCriteria === "Sort by title") {
