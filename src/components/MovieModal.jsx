@@ -49,14 +49,13 @@ export default function MovieModal({ onClose, movie }) {
         <h2 id="movieTitle"> {movie[0]} </h2>
         <iframe
           width="100%"
-          height="400"
+          height="200"
           src={`https://www.youtube.com/embed/${trailerKey}`}
         ></iframe>
         <img src={movie[1]} className="modalImg" />
         <p> Release date: {movie[2]} </p>
         <p> Overview: {movie[3]} </p>
         <p> Genres: {movie[4].join()} </p>
-
         {createPortal(<p> {movie} </p>, document.body)}
       </div>
     </div>

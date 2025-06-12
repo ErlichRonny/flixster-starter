@@ -15,6 +15,7 @@ export default function MovieList({
   setChecked,
   liked,
   setLiked,
+  lastSearchQuery,
 }) {
   const [originalMovies, setOriginalMovies] = useState([]);
   const [movies, setMovies] = useState([]);
@@ -34,17 +35,22 @@ export default function MovieList({
     setPageNumber((pageNumber) => pageNumber + 1);
   };
 
-  const toggleViewChange = (view) => {
-    setCurrentView(view);
-    setMovies([]);
+  const toggleViewChange = (newView) => {
+    if (newView === view) {
+      return;
+    }
+    setCurrentView(newView);
     setPageNumber(1);
-    if (view == "nowPlaying") {
-      setIsSearching(false);
-      setSearchQuery("");
-    } else {
-      if (searchQuery) {
-        setIsSearching(true);
+
+    setMovies([]);
+    if (newView == "nowPlaying") {
+      if (isSearching) {
+        setIsSearching(false);
+        setSearchQuery("");
       }
+    } else if (newView === "search") {
+      setIsSearching(true);
+      setSearchQuery(lastSearchQuery);
     }
   };
 
@@ -98,12 +104,12 @@ export default function MovieList({
 
         let url;
         if (isSearching && searchQuery) {
-          //   url = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
-          //     searchQuery
-          //   )}&include_adult=false&language=en-US&page=1`;
           url = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
             searchQuery
-          )}&include_adult=false&language=en-US&page=${pageNumber}`;
+          )}&include_adult=false&language=en-US&page=1`;
+          // url = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
+          //   searchQuery
+          // )}&include_adult=false&language=en-US&page=${pageNumber}`;
         } else {
           url = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${pageNumber}`;
         }

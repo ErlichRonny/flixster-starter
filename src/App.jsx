@@ -9,12 +9,14 @@ function App() {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
+  const [lastSearchQuery, setLastSearchQuery] = useState("");
   const [sortCriteria, setSortCriteria] = useState("no sort");
   const [checked, setChecked] = useState([]);
   const [liked, setLiked] = useState([]);
 
-  const handleSearchChange = (event) => {
-    setSearchQuery(event);
+  const handleSearchChange = (query) => {
+    setSearchQuery(query);
+    setLastSearchQuery(query);
     setPageNumber(1);
     setIsSearching(true);
   };
@@ -23,6 +25,7 @@ function App() {
     setSearchQuery("");
     setIsSearching(false);
     setPageNumber(1);
+    setLastSearchQuery("");
   };
 
   const handleSortChange = (event) => {
@@ -210,7 +213,7 @@ function App() {
         <Header onSearch={handleSearchChange} onClear={clearSearch} />
       </header>
       <main>
-        <Sidebar liked={liked} checked={checked}/>
+        <Sidebar liked={liked} checked={checked} />
         <div className="dropDown">
           <select name="sortMovies" onChange={handleSortChange}>
             <option value="no sort"> Sort movies </option>
@@ -231,9 +234,10 @@ function App() {
           setIsSearching={setIsSearching}
           sortCriteria={sortCriteria}
           checked={checked}
-          setChecked = {setChecked}
+          setChecked={setChecked}
           liked={liked}
-          setLiked = {setLiked}
+          setLiked={setLiked}
+          lastSearchQuery={lastSearchQuery}
         />
       </main>
       <footer></footer>
