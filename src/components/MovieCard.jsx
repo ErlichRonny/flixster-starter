@@ -11,7 +11,6 @@ export default function MovieCard({
   setLiked,
   onCardClick,
 }) {
-  console.log(title);
   const handleCheckboxChange = () => {
     checked.includes(title)
       ? setChecked(checked.filter((movieTitle) => movieTitle !== title))
@@ -32,7 +31,10 @@ export default function MovieCard({
   return (
     <div onClick={onCardClick}>
       <h2 id="movieTitle"> {title}</h2>
-      {checked.includes(title) && <p> ✅ </p>}
+      <div class="iconDiv">
+        {checked.includes(title) && <p> ✅ </p>}
+        {liked.includes(id) && <p> ❤️ </p>}
+      </div>
       <img
         src={!posterPath.endsWith("null") ? posterPath : defaultPoster}
         className="movieImg"
