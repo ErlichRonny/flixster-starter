@@ -434,4 +434,13 @@ form:hover .clearBtn {
   align-items: center;
   gap: 0.5em;
   justify-content: center;
+  margin-bottom: 15px;
+  margin-top: -20px;
+}
+
+.sidebarTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  justify-content: center;
 }
