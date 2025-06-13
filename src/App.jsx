@@ -37,43 +37,58 @@ function App() {
   return (
     <div className="App">
       <header>
-        <Header onSearch={handleSearchChange} onClear={clearSearch} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      </header>
-      <main>
-        <Sidebar liked={liked} checked={checked} movies={movies}/>
-        <div className="dropdown">
-          <button className="dropbtn"> Sort Movies ▼ </button>
-          <div className="dropdown-content">
-            <option value="Sort by title" onClick={handleSortChange}>
-              {" "}
-              Sort by title, A-Z{" "}
-            </option>
-            <option value="Sort by release date" onClick={handleSortChange}>
-              {" "}
-              Sort by release date{" "}
-            </option>
-            <option value="Sort by vote average" onClick={handleSortChange}>
-              {" "}
-              Sort by vote average, descending{" "}
-            </option>
-          </div>
-        </div>
-        <MovieList
-          pageNumber={pageNumber}
-          setPageNumber={setPageNumber}
+        <Header
+          onSearch={handleSearchChange}
+          onClear={clearSearch}
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
-          isSearching={isSearching}
-          setIsSearching={setIsSearching}
-          sortCriteria={sortCriteria}
-          checked={checked}
-          setChecked={setChecked}
-          liked={liked}
-          setLiked={setLiked}
-          lastSearchQuery={lastSearchQuery}
-          movies={movies}
-          setMovies={setMovies}
         />
+      </header>
+      <main>
+        <div className="layout">
+          <Sidebar liked={liked} checked={checked} movies={movies} />
+          <div className="mainContent">
+              <div className="dropdown">
+                <button className="dropbtn"> Sort Movies ▼ </button>
+                <div className="dropdown-content">
+                  <option value="Sort by title" onClick={handleSortChange}>
+                    {" "}
+                    Sort by title, A-Z{" "}
+                  </option>
+                  <option
+                    value="Sort by release date"
+                    onClick={handleSortChange}
+                  >
+                    {" "}
+                    Sort by release date{" "}
+                  </option>
+                  <option
+                    value="Sort by vote average"
+                    onClick={handleSortChange}
+                  >
+                    {" "}
+                    Sort by vote average, descending{" "}
+                  </option>
+                </div>
+              </div>
+              <MovieList
+                pageNumber={pageNumber}
+                setPageNumber={setPageNumber}
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+                isSearching={isSearching}
+                setIsSearching={setIsSearching}
+                sortCriteria={sortCriteria}
+                checked={checked}
+                setChecked={setChecked}
+                liked={liked}
+                setLiked={setLiked}
+                lastSearchQuery={lastSearchQuery}
+                movies={movies}
+                setMovies={setMovies}
+              />
+            </div>
+          </div>
       </main>
       <footer></footer>
     </div>
