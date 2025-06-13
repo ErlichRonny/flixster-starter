@@ -12,6 +12,20 @@ h2,
   letter-spacing: 1px;
 }
 
+#mainMovieTitle {
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 1px;
+  font-size: 30px;
+}
+
+#modalTitle {
+  font-size: 40px;
+}
+
+#movieVoteAverage {
+  font-size: 17px;
+  font-family: sans-serif;
+}
 /* Based on CodePen by hamdiye - https://codepen.io/hamdiye/pen/povPRQJ  */
 
 .netflix-stick {
@@ -272,17 +286,8 @@ form:hover .clearBtn {
 }
 
 .movieModal {
-  /* position: fixed;
-  top: 15%;
-  left: 25%;
-  height: 80%;
-  width: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: white; */
   position: fixed;
-  top: 50%;
+  top: 50vh;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: rgba(0, 0, 0, 0.95);
@@ -295,17 +300,23 @@ form:hover .clearBtn {
 }
 
 .modalContent {
-  /* display: flex;
-  flex-direction: column;
-  padding: 20px 40px; */
   background-color: #222;
   padding: 20px;
   border-radius: 8px;
 }
 
-#closeModalBtn {
+.modalMedia {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 20px;
 }
 
+#closeModalBtn {
+  padding: 20px 60px;
+  font-size: 20px;
+}
 #watchedText {
   color: white;
 }

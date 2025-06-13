@@ -30,10 +30,10 @@ export default function MovieCard({
 
   return (
     <div onClick={onCardClick}>
-      <h2 id="movieTitle"> {title}</h2>
+      <h2 id="mainMovieTitle"> {title}</h2>
       <div class="iconDiv">
-        {checked.includes(title) && <p> ✅ </p>}
-        {liked.includes(id) && <p> ❤️ </p>}
+        {checked.includes(title) && <span> ✅ </span>}
+        {liked.includes(id) && <span> ❤️ </span>}
       </div>
       <img
         src={!posterPath.endsWith("null") ? posterPath : defaultPoster}
