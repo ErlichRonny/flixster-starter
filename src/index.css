@@ -1,9 +1,14 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: rgb(255, 255, 255);
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  background-color: #141414;
+  color: #fff;
 }
 
+h1, h2, #movieTitle {
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 1px;
+}
 .netflix-stick {
   width: 1.75vh;
   height: 7.5vh;
@@ -61,28 +66,44 @@ body {
 }
 
 button {
-  background-color: #282c34;
+  /* background-color: #282c34;
   color: white;
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease; */
+  background-color: #e50914;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.2s;
 }
 
 button:hover {
-  background-color: #777;
-  color: white;
+  background-color: #9e060d;
 }
 
 header {
-  background-color: black;
+  /* background-color: black;
   font-size: 20px;
   display: flex;
   justify-content: space-around;
   text-align: center;
   position: sticky;
   padding: 20px 40px;
-  margin-bottom: 30px;
+  margin-bottom: 30px; */
+  background-color: #141414;
+  padding: 20px 40px;
+  font-size: 1.2rem;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .loadBtn {
@@ -108,29 +129,37 @@ footer {
 }
 
 .MovieCard {
-  margin: 10px 10px;
-  padding: 10px 10px 10px 10px;
-  border: 2px solid #e7d6ee72;
+  /* margin: 10px 10px;
+  padding: 10px 10px 10px 10px; */
+  /* cursor: pointer; */
+  background-color: #222;
+  border: none;
   border-radius: 8px;
-  cursor: pointer;
-  background-color: black;
-  transition: box-shadow 0.2s;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 200px;
+  text-align: center;
+  /* transition: box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); */
 }
 
 .MovieCard:hover {
-  background: #f1ecf3;
-  border: 2px solid #e6cef5;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  background-color: #333;
+  transform: scale(1.05);
+  /* border: 2px solid #e6cef5; */
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
 }
 
 #movieTitle {
-  text-shadow: 2px 2px 0 #9d9db9;
-  color: #6d5e8f;
+  /* text-shadow: 2px 2px 0 #9d9db9;
+  color: #6d5e8f; */
+  font-size: 1.1rem;
+  color: #fff;
+  margin: 10px 0 5px 0;
 }
 
 #movieVoteAverage {
-  color: white;
+  color: #bbb;
 }
 
 .header {
@@ -139,8 +168,12 @@ footer {
 }
 
 .movieImg {
-  width: auto;
+  /* width: auto;
+  height: 300px; */
+  width: 100%;
   height: 300px;
+  object-fit: cover;
+  border-bottom: 2px solid #e50914;
 }
 
 .modalImg {
@@ -215,7 +248,7 @@ form:hover #searchBtn {
 }
 
 .movieModal {
-  position: fixed;
+  /* position: fixed;
   top: 15%;
   left: 25%;
   height: 80%;
@@ -223,13 +256,23 @@ form:hover #searchBtn {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: white; */
+  position: fixed;
+  top: 15%;
+  left: 25%;
+  background-color: rgba(0,0,0,0.9);
+  color: white;
+  padding: 40px;
+  border-radius: 8px;
 }
 
 .modalContent {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  padding: 20px 40px;
+  padding: 20px 40px; */
+  background-color: #222;
+  padding: 20px;
+  border-radius: 8px;
 }
 
 #closeModalBtn {
@@ -240,15 +283,27 @@ form:hover #searchBtn {
 }
 
 .sidebarDiv {
-  margin: 0;
+  /* margin: 0;
   padding: 0;
   width: 200px;
   position: fixed;
   height: 100%;
   overflow: auto;
-  background-color: white;
+  background-color: white; */
+  width: 250px;
+  background-color: #181818;
+  color: white;
+  padding: 20px;
+  height: 100vh;
+  position: fixed;
+  overflow-y: auto;
 }
 
+.sidebarDiv h2 {
+  border-bottom: 1px solid #333;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
 .dropbtn{
   background: #04AA6D;
   color: white;
