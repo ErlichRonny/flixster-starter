@@ -37,7 +37,7 @@ h2,
   font-weight: 400;
   font-style: normal;
   font-size: 90px;
-  color: #e50914;
+  color: #F10918;
   letter-spacing: 2px;
   transform: rotate(calc(var(--i) * 10deg));
   transform-origin: bottom center;
