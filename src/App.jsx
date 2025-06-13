@@ -13,6 +13,7 @@ function App() {
   const [sortCriteria, setSortCriteria] = useState("no sort");
   const [checked, setChecked] = useState([]);
   const [liked, setLiked] = useState([]);
+  const [movies, setMovies] = useState([]);
 
   const handleSearchChange = (query) => {
     setSearchQuery(query);
@@ -39,7 +40,7 @@ function App() {
         <Header onSearch={handleSearchChange} onClear={clearSearch} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       </header>
       <main>
-        <Sidebar liked={liked} checked={checked} />
+        <Sidebar liked={liked} checked={checked} movies={movies}/>
         <div className="dropdown">
           <button className="dropbtn"> Sort Movies ▼ </button>
           <div className="dropdown-content">
@@ -70,6 +71,8 @@ function App() {
           liked={liked}
           setLiked={setLiked}
           lastSearchQuery={lastSearchQuery}
+          movies={movies}
+          setMovies={setMovies}
         />
       </main>
       <footer></footer>

@@ -16,9 +16,10 @@ export default function MovieList({
   liked,
   setLiked,
   lastSearchQuery,
+  movies,
+  setMovies
 }) {
   const [originalMovies, setOriginalMovies] = useState([]);
-  const [movies, setMovies] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
   const [view, setCurrentView] = useState("nowPlaying");
   const [selectedMovie, setSelectedMovie] = useState([]);
@@ -214,6 +215,7 @@ export default function MovieList({
             }
           >
             <MovieCard
+              id={element.id}
               title={element.title}
               posterPath={`https://image.tmdb.org/t/p/w500${element.poster_path}`}
               voteAverage={element.vote_average}
@@ -242,7 +244,7 @@ export default function MovieList({
       )}
       {pageNumber < totalPages && !isSearching && (
         <div className="loadBtn">
-          <button type="button" onClick={incrementPage}>
+          <button type="button" id="loadMore" onClick={incrementPage}>
             Load More
           </button>
         </div>

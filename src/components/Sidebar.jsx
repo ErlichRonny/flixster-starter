@@ -1,18 +1,19 @@
-export function Sidebar({ liked, checked }) {
+export function Sidebar({ liked, checked, movies }) {
   return (
     <div className="sidebarDiv">
       <div className="favoriteMovies">
         <h2> Favorited Movies </h2>
-        <p> {liked} </p>
-        {liked.map((movie) => (
-          <p key={movie}> {movie} </p>
-        ))} 
+        {liked.map((id) => {
+          const movie = movies.find((m) => m.id === id);
+          return <p key={id}>{movie ? movie.title : id}</p>;
+        })}
       </div>
       <div className="watchedMovies">
         <h2> Watched List </h2>
-        {checked.map((movie) => (
-          <p key={movie}> {movie} </p>
-        ))}
+        {checked.map((id) => {
+          const movie = movies.find((m) => m.id === id);
+          return <p key={id}>{movie ? movie.title : id}</p>;
+        })}
       </div>
     </div>
   );
