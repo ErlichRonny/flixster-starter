@@ -103,7 +103,7 @@ header {
   position: sticky;
   padding: 20px 40px;
   margin-bottom: 30px; */
-  background-color: #0A0A0A;
+  background-color: #0a0a0a;
   padding: 20px 20px;
   font-size: 1.2rem;
   color: white;
@@ -254,6 +254,23 @@ form:hover input {
   display: block;
 }
 
+.clearBtn {
+  position: absolute;
+  top: 0;
+  right: 50px;
+  height: 42.5px;
+  padding: 0 10px;
+  border: none;
+  background: #bfbdbd;
+  border-radius: 20px;
+  font-size: 1em;
+  display: none;
+  cursor: pointer;
+}
+form:hover .clearBtn {
+  display: block;
+}
+
 .movieModal {
   /* position: fixed;
   top: 15%;
@@ -401,7 +418,7 @@ form:hover input {
   }
 }
 
-.iconDiv{
+.iconDiv {
   display: flex;
   align-items: center;
   gap: 0.5em;

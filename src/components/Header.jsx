@@ -64,7 +64,7 @@ export default function Header({
               🔍{" "}
             </button>
             {searchQuery && (
-              <button id="clearBtn" type="button" onClick={handleClear}>
+              <button id="clearBtn" className="clearBtn" type="button" onClick={handleClear}>
                 Clear
               </button>
             )}
