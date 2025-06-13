@@ -5,13 +5,13 @@ export function Sidebar({ liked, checked }) {
         <h2> Favorited Movies </h2>
         <p> {liked} </p>
         {liked.map((movie) => (
-          <p> {movie} </p>
+          <p key={movie}> {movie} </p>
         ))} 
       </div>
-      <div className="watchedMovis">
+      <div className="watchedMovies">
         <h2> Watched List </h2>
         {checked.map((movie) => (
-          <p> {movie} </p>
+          <p key={movie}> {movie} </p>
         ))}
       </div>
     </div>

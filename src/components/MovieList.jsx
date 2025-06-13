@@ -36,23 +36,34 @@ export default function MovieList({
   };
 
   const toggleViewChange = (newView) => {
-    if (newView === view) {
+    if (newView === view && movies.length > 0) {
       return;
     }
     setCurrentView(newView);
     setPageNumber(1);
-
     setMovies([]);
+    setOriginalMovies(movies);
+
     if (newView == "nowPlaying") {
-      if (isSearching) {
-        setIsSearching(false);
-        setSearchQuery("");
-      }
+      setIsSearching(false);
+      setSearchQuery("");
     } else if (newView === "search") {
+
       setIsSearching(true);
-      setSearchQuery(lastSearchQuery);
+      if (lastSearchQuery) {
+        setSearchQuery(lastSearchQuery);
+      }
     }
+    setCurrentView(newView);
   };
+
+  useEffect(() => {
+    if (isSearching && view !== "search") {
+      setCurrentView("search");
+    } else if (!isSearching && view !== "nowPlaying") {
+      setCurrentView("nowPlaying");
+    }
+  }, [isSearching]);
 
   const getGenres = (genreIds) => {
     let genreList = [];
@@ -107,9 +118,6 @@ export default function MovieList({
           url = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
             searchQuery
           )}&include_adult=false&language=en-US&page=1`;
-          // url = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
-          //   searchQuery
-          // )}&include_adult=false&language=en-US&page=${pageNumber}`;
         } else {
           url = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${pageNumber}`;
         }
@@ -182,7 +190,13 @@ export default function MovieList({
         {" "}
         Search Results{" "}
       </button>
-      {view === "search" && <h3> Search results for : {searchQuery}</h3>}
+      {view === "search" && searchQuery && (
+        <h3> Search results for : {searchQuery}</h3>
+      )}
+      {view === "search" && !searchQuery && (
+        <h3> Enter a search term to find movies! {searchQuery}</h3>
+      )}
+
       {view === "nowPlaying" && <h3> Now playing: </h3>}
       <div className="MovieList">
         {movies.map((element) => (

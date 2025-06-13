@@ -36,7 +36,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        <Header onSearch={handleSearchChange} onClear={clearSearch} />
+        <Header onSearch={handleSearchChange} onClear={clearSearch} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       </header>
       <main>
         <Sidebar liked={liked} checked={checked} />

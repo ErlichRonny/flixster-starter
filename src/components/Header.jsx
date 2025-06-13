@@ -1,25 +1,35 @@
 import { useState } from "react";
 
-export default function Header({ onSearch, onClear }) {
-  const [searchQuery, setSearchQuery] = useState("");
-
+export default function Header({
+  onSearch,
+  onClear,
+  searchQuery,
+  setSearchQuery,
+}) {
   const handleInputChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
   const handleEnter = (event) => {
-    console.log(event);
     if (event.key === "Enter") {
+      console.log("Enter");
+      event.preventDefault();
       handleSearch();
     } else if (event.key === "Backspace") {
       handleClear();
     }
   };
-  const handleSearch = () => {
+  const handleSearch = (event) => {
+    if (event) {
+      event.preventDefault();
+    }
     onSearch(searchQuery.trim());
   };
 
-  const handleClear = () => {
+  const handleClear = (event) => {
+    if (event) {
+      event.preventDefault();
+    }
     setSearchQuery("");
     onClear();
   };
@@ -45,16 +55,16 @@ export default function Header({ onSearch, onClear }) {
               type="search"
               value={searchQuery}
               onChange={handleInputChange}
-              onKeyUp={(event) => handleEnter(event)}
+              onKeyDown={(event) => handleEnter(event)}
               placeholder="Search movies..."
-              class="input"
+              className="input"
             />
-            <button id="searchBtn" onClick={handleSearch}>
+            <button id="searchBtn" type="button" onClick={handleSearch}>
               {" "}
               🔍{" "}
             </button>
             {searchQuery && (
-              <button id="clearBtn" onClick={handleClear}>
+              <button id="clearBtn" type="button" onClick={handleClear}>
                 Clear
               </button>
             )}
