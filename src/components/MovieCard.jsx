@@ -35,9 +35,9 @@ export default function MovieCard({
   };
 
   return (
-    <div onClick={onCardClick}>
+    <article onClick={onCardClick}>
       <h2 id="mainMovieTitle"> {title}</h2>
-      <div class="iconDiv">
+      <div className="iconDiv">
         {checked.includes(id) && (
           <FontAwesomeIcon icon={faEye} style={{ color: "#B7DDF0" }} />
         )}
@@ -74,6 +74,6 @@ export default function MovieCard({
           <FontAwesomeIcon icon={faHeartRegular} />
         )}
       </button>
-    </div>
+    </article>
   );
 }

@@ -46,7 +46,17 @@ function App() {
       </header>
       <main>
         <div className="layout">
-          <Sidebar liked={liked} checked={checked} movies={movies} view={view} setView={setView}/>
+          <aside>
+            <nav>
+              <Sidebar
+                liked={liked}
+                checked={checked}
+                movies={movies}
+                view={view}
+                setView={setView}
+              />
+            </nav>
+          </aside>
           <div className="mainContent">
             <div className="dropdown">
               <button className="dropbtn"> Sort Movies ▼ </button>

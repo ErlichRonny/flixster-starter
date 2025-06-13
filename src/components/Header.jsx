@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 export default function Header({
   onSearch,
   onClear,
@@ -14,8 +12,6 @@ export default function Header({
     if (event.key === "Enter") {
       event.preventDefault();
       handleSearch();
-    } else if (event.key === "Backspace") {
-      handleClear();
     }
   };
   const handleSearch = (event) => {
@@ -35,10 +31,6 @@ export default function Header({
 
   return (
     <>
-      <style>
-        @import
-        url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-      </style>
       <div className="header">
         <h2 id="websiteTitle" className="bebas-neue-regular">
           {" "}
@@ -59,7 +51,12 @@ export default function Header({
               🔍{" "}
             </button>
             {searchQuery && (
-              <button id="clearBtn" className="clearBtn" type="button" onClick={handleClear}>
+              <button
+                id="clearBtn"
+                className="clearBtn"
+                type="button"
+                onClick={handleClear}
+              >
                 Clear
               </button>
             )}
