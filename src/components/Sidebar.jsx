@@ -11,13 +11,13 @@ export function Sidebar({ liked, checked, movies, view, setView }) {
       <div className="allMovies">
         <button className="sidebarTitle" id="sidebarBtn" onClick={() => setView("nowPlaying")}>
           <FontAwesomeIcon icon={faHome} style={{ color: "white" }} />
-          <h2> All Movies </h2>
+          <h2> Home </h2>
         </button>
       </div>
       <div className="favoriteMovies">
         <button className="sidebarTitle" id="sidebarBtn" onClick={() => setView("liked")}>
           <FontAwesomeIcon icon={faHeartSolid} style={{ color: "#F06A71" }} />
-          <h2> Favorited Movies </h2>
+          <h2> Favorites </h2>
         </button>
       </div>
       <div className="watchedMovies">

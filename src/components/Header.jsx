@@ -39,10 +39,6 @@ export default function Header({
         @import
         url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
       </style>
-      {/* Based on CodePen by hamdiye - https://codepen.io/hamdiye/pen/povPRQJ */}
-      {/* <div class="netflix-stick">
-        <div class="thing"></div>
-      </div>  */}
       <div className="header">
         <h2 id="websiteTitle" className="bebas-neue-regular">
           {" "}
