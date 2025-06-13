@@ -42,28 +42,33 @@ export default function MovieModal({ onClose, movie }) {
   }, [movie]);
 
   return (
-    <div className="movieModal">
-      <div className="modalContent">
-        <button onClick={onClose} id="closeModalBtn">
-          𝘅
-        </button>
-        <h2 id="modalTitle"> {movie[0]} </h2>
-        <div className="modalMedia">
-          <img
-            src={!movie[1].endsWith("null") ? movie[1] : defaultPoster}
-            className="modalImg"
-          />
-          <iframe
-            width="100%"
-            height="430"
-            src={`https://www.youtube.com/embed/${trailerKey}`}
-          ></iframe>
-        </div>
-        <p> Release date: {movie[2]} </p>
-        <p> Overview: {movie[3]} </p>
-        <p> Genres: {movie[4].join()} </p>
-        {createPortal(<p> {movie} </p>, document.body)}
+    <>
+      <div className="modal-backdrop">
+        <div className="movieModal">
+          <div className="modalContent">
+            <button onClick={onClose} id="closeModalBtn">
+              𝘅
+            </button>
+            <h2 id="modalTitle"> {movie[0]} </h2>
+            <div className="modalMedia">
+              <img
+                src={!movie[1].endsWith("null") ? movie[1] : defaultPoster}
+                className="modalImg"
+                alt={`Poster for ${movie[0]}`}
+              />
+              <iframe
+                width="100%"
+                height="430"
+                src={`https://www.youtube.com/embed/${trailerKey}`}
+              ></iframe>
+            </div>
+            <p> Release date: {movie[2]} </p>
+            <p> Overview: {movie[3]} </p>
+            <p> Genres: {movie[4].join()} </p>
+            {createPortal(<p> {movie} </p>, document.body)}
+          </div>
+        </div>{" "}
       </div>
-    </div>
+    </>
   );
 }

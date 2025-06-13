@@ -1,8 +1,11 @@
 import defaultPoster from "../assets/default_poster.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEye,
+  faHeart as faHeartSolid,
+} from "@fortawesome/free-solid-svg-icons";
 
-import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons';
+import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 
 export default function MovieCard({
   id,
@@ -46,6 +49,7 @@ export default function MovieCard({
       <img
         src={!posterPath.endsWith("null") ? posterPath : defaultPoster}
         className="movieImg"
+        alt={`Poster for ${title}`}
       />
       <p id="movieVoteAverage"> Vote average: {voteAverage}</p>
       <div>
@@ -62,7 +66,7 @@ export default function MovieCard({
       </div>
       <button type="button" className="likeButton" onClick={handleLike}>
         {liked.includes(id) ? (
-          <FontAwesomeIcon icon={faHeartSolid}  style={{ color: "white" }}/>
+          <FontAwesomeIcon icon={faHeartSolid} style={{ color: "white" }} />
         ) : (
           <FontAwesomeIcon icon={faHeartRegular} />
         )}

@@ -236,7 +236,7 @@ export default function MovieList({
           </div>
         ))}
       </div>
-      {isModalOpen === true && (
+      {isModalOpen && (
         <MovieModal
           onClose={() => setIsModalOpen(false)}
           movie={selectedMovie}
