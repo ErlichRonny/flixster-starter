@@ -1,3 +1,5 @@
+import defaultPoster from "../assets/default_poster.png";
+
 export default function MovieCard({
   title,
   posterPath,
@@ -6,6 +8,7 @@ export default function MovieCard({
   setChecked,
   liked,
   setLiked,
+  onCardClick,
 }) {
   const handleCheckboxChange = () => {
     checked.includes(title)
@@ -15,20 +18,23 @@ export default function MovieCard({
     console.log(checked);
   };
   const handleLike = (event) => {
-    console.log('handleliked called');
+    console.log("handleliked called");
     event.stopPropagation();
-    liked.includes(title)
-      ? setLiked(liked.filter((movieTitle) => movieTitle !== title))
-      : setLiked([...liked, title]);
-    console.log(liked);
+    setLiked((prevLiked) =>
+      prevLiked.includes(title)
+        ? prevLiked.filter((movieTitle) => movieTitle !== title)
+        : [...prevLiked, title]
+    );
   };
-  
 
   return (
-    <div>
+    <div onClick={onCardClick}>
       <h2 id="movieTitle"> {title}</h2>
       {checked.includes(title) && <p> ✅ </p>}
-      <img src={posterPath} className="movieImg" />
+      <img
+        src={!posterPath.endsWith("null") ? posterPath : defaultPoster}
+        className="movieImg"
+      />
       <p id="movieVoteAverage"> Vote average: {voteAverage}</p>
       <div>
         <input

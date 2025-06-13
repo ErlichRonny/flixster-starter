@@ -1,5 +1,6 @@
 import { createPortal } from "react-dom";
 import { useState, useEffect } from "react";
+import defaultPoster from "../assets/default_poster.png";
 
 export default function MovieModal({ onClose, movie }) {
   const [trailerKey, setTrailerKey] = useState("");
@@ -52,7 +53,10 @@ export default function MovieModal({ onClose, movie }) {
           height="200"
           src={`https://www.youtube.com/embed/${trailerKey}`}
         ></iframe>
-        <img src={movie[1]} className="modalImg" />
+        <img
+          src={!movie[1].endsWith("null") ? movie[1] : defaultPoster}
+          className="modalImg"
+        />
         <p> Release date: {movie[2]} </p>
         <p> Overview: {movie[3]} </p>
         <p> Genres: {movie[4].join()} </p>

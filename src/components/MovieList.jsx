@@ -48,7 +48,6 @@ export default function MovieList({
       setIsSearching(false);
       setSearchQuery("");
     } else if (newView === "search") {
-
       setIsSearching(true);
       if (lastSearchQuery) {
         setSearchQuery(lastSearchQuery);
@@ -222,6 +221,15 @@ export default function MovieList({
               setChecked={setChecked}
               liked={liked}
               setLiked={setLiked}
+              onCardClick={() =>
+                handleMovieClick(
+                  element.title,
+                  `https://image.tmdb.org/t/p/w500${element.poster_path}`,
+                  element.release_date,
+                  element.overview,
+                  getGenres(element.genre_ids)
+                )
+              }
             />
           </div>
         ))}
