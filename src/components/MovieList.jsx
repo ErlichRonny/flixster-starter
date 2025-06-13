@@ -66,9 +66,9 @@ export default function MovieList({
 
   useEffect(() => {
     if (isSearching && view !== "search") {
-      setCurrentView("search");
+      setView("search");
     } else if (!isSearching && view !== "nowPlaying") {
-      setCurrentView("nowPlaying");
+      setView("nowPlaying");
     }
   }, [isSearching]);
 
