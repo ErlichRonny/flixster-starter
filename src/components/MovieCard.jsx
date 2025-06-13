@@ -64,7 +64,7 @@ export default function MovieCard({
           Watched?{" "}
         </label>
       </div>
-      <button type="button" className="likeButton" onClick={handleLike}>
+      <button type="button" id="likeButton" onClick={handleLike}>
         {liked.includes(id) ? (
           <FontAwesomeIcon icon={faHeartSolid} style={{ color: "white" }} />
         ) : (

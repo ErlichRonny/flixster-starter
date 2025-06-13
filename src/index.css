@@ -93,11 +93,22 @@ button {
   background-color: #e50914;
   color: white;
   border: none;
+  font-size: 17px;
   padding: 10px 15px;
   border-radius: 4px;
   font-weight: bold;
   transition: background-color 0.2s;
   margin-right: 7px;
+}
+
+#likeButton {
+  background-color: #e50914;
+  color: white;
+  border: none;
+  font-size: 15px;
+  transition: background-color 0.2s;
+  margin-right: 7px;
+  margin-top: 2px;
 }
 
 button:hover {
@@ -306,6 +317,7 @@ form:hover .clearBtn {
 }
 
 .sidebarDiv {
+  display: none;
   width: 250px;
   background-color: #181818;
   color: white;

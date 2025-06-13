@@ -17,7 +17,7 @@ export default function MovieList({
   setLiked,
   lastSearchQuery,
   movies,
-  setMovies
+  setMovies,
 }) {
   const [originalMovies, setOriginalMovies] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
@@ -198,9 +198,9 @@ export default function MovieList({
       )}
 
       {view === "nowPlaying" && <h3> Now playing: </h3>}
-      <div className="MovieList">
+      <ul className="MovieList">
         {movies.map((element) => (
-          <div
+          <li
             className="MovieCard"
             key={element.id}
             onClick={() =>
@@ -233,9 +233,9 @@ export default function MovieList({
                 )
               }
             />
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
       {isModalOpen && (
         <MovieModal
           onClose={() => setIsModalOpen(false)}
