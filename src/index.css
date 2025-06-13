@@ -141,7 +141,7 @@ footer {
   height: 30px;
   padding: 15px 10px 15px 10px;
   width: 100%;
-  background-color: #e4cef57b;
+  background-color: #0a0a0a;
   text-align: center;
 }
 
@@ -312,13 +312,8 @@ form:hover .clearBtn {
   color: white;
 }
 
-.mainContent {
-  flex: 1;
-}
-
 .sidebarDiv {
-  display: none;
-  width: 250px;
+  width: 200px;
   background-color: #181818;
   color: white;
   padding: 20px;
@@ -360,6 +355,15 @@ form:hover .clearBtn {
   justify-content: center;
 }
 
+#sidebarBtn {
+  background-color: #181818;
+  color: #fff;
+}
+#sidebarBtn:hover {
+  background-color: #0F0F0F;
+  color: #fff;
+}
+
 .dropbtn {
   background: #e50914;
   color: white;
@@ -398,6 +402,11 @@ form:hover .clearBtn {
 }
 .dropdown:hover .dropbtn {
   background-color: #9e060d;
+}
+
+#watchedBox {
+  width: 16px;
+  height: 16px;
 }
 
 @media (max-width: 1024px) {

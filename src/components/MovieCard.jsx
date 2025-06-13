@@ -19,14 +19,13 @@ export default function MovieCard({
   onCardClick,
 }) {
   const handleCheckboxChange = () => {
-    checked.includes(title)
-      ? setChecked(checked.filter((movieTitle) => movieTitle !== title))
-      : setChecked([...checked, title]);
-
-    console.log(checked);
+    setChecked((prevChecked) =>
+      prevChecked.includes(id)
+        ? prevChecked.filter((movieId) => movieId !== id)
+        : [...prevChecked, id]
+    );
   };
   const handleLike = (event) => {
-    console.log("handleLike called for:", title);
     event.stopPropagation();
     setLiked((prevLiked) =>
       prevLiked.includes(id)
@@ -39,7 +38,7 @@ export default function MovieCard({
     <div onClick={onCardClick}>
       <h2 id="mainMovieTitle"> {title}</h2>
       <div class="iconDiv">
-        {checked.includes(title) && (
+        {checked.includes(id) && (
           <FontAwesomeIcon icon={faEye} style={{ color: "#B7DDF0" }} />
         )}
         {liked.includes(id) && (
@@ -51,15 +50,19 @@ export default function MovieCard({
         className="movieImg"
         alt={`Poster for ${title}`}
       />
-      <p id="movieVoteAverage"> Vote average: {Math.round(voteAverage * 10) / 10}</p>
+      <p id="movieVoteAverage">
+        {" "}
+        Vote average: {Math.round(voteAverage * 10) / 10}
+      </p>
       <div>
         <input
           type="checkbox"
           id="watchedBox"
+          checked={checked.includes(id)}
           onClick={(event) => event.stopPropagation()}
           onChange={handleCheckboxChange}
         />
-        <label for="watched" id="watchedText">
+        <label htmlFor="watched" id="watchedText">
           {" "}
           Watched?{" "}
         </label>

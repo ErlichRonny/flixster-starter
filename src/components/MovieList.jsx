@@ -18,14 +18,22 @@ export default function MovieList({
   lastSearchQuery,
   movies,
   setMovies,
+  view,
+  setView,
 }) {
   const [originalMovies, setOriginalMovies] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
-  const [view, setCurrentView] = useState("nowPlaying");
   const [selectedMovie, setSelectedMovie] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [genres, setGenres] = useState([]);
   const [genreMapping, setGenreMapping] = useState({});
+
+  let filteredMovies = movies;
+  if (view === "liked") {
+    filteredMovies = movies.filter((m) => liked.includes(m.id));
+  } else if (view === "watched") {
+    filteredMovies = movies.filter((m) => checked.includes(m.id));
+  }
 
   const handleMovieClick = (title, img, releaseDate, overview, genres, id) => {
     setSelectedMovie([title, img, releaseDate, overview, genres, id]);
@@ -40,7 +48,7 @@ export default function MovieList({
     if (newView === view && movies.length > 0) {
       return;
     }
-    setCurrentView(newView);
+    setView(newView);
     setPageNumber(1);
     setMovies([]);
     setOriginalMovies(movies);
@@ -54,7 +62,6 @@ export default function MovieList({
         setSearchQuery(lastSearchQuery);
       }
     }
-    setCurrentView(newView);
   };
 
   useEffect(() => {
@@ -174,22 +181,24 @@ export default function MovieList({
 
   return (
     <>
-      <button
-        type="button"
-        onClick={() => toggleViewChange("nowPlaying")}
-        className={view === "nowPlaying" ? "active" : ""}
-      >
-        {" "}
-        Now playing{" "}
-      </button>
-      <button
-        type="button"
-        onClick={() => toggleViewChange("search")}
-        className={view === "search" ? "active" : ""}
-      >
-        {" "}
-        Search Results{" "}
-      </button>
+      {(view === "nowPlaying" || view === "search") && (
+        <>
+          <button
+            type="button"
+            onClick={() => toggleViewChange("nowPlaying")}
+            className={view === "nowPlaying" ? "active" : ""}
+          >
+            Now playing
+          </button>
+          <button
+            type="button"
+            onClick={() => toggleViewChange("search")}
+            className={view === "search" ? "active" : ""}
+          >
+            Search Results
+          </button>
+        </>
+      )}
       {view === "search" && searchQuery && (
         <h3> Search results for : {searchQuery}</h3>
       )}
@@ -199,7 +208,7 @@ export default function MovieList({
 
       {view === "nowPlaying" && <h3> Now playing: </h3>}
       <ul className="MovieList">
-        {movies.map((element) => (
+        {filteredMovies.map((element) => (
           <li
             className="MovieCard"
             key={element.id}
@@ -242,14 +251,14 @@ export default function MovieList({
           movie={selectedMovie}
         ></MovieModal>
       )}
-      {pageNumber < totalPages && !isSearching && (
+      {view === "nowPlaying" && pageNumber < totalPages && !isSearching && (
         <div className="loadBtn">
           <button type="button" id="loadMore" onClick={incrementPage}>
             Load More
           </button>
         </div>
       )}
-      {pageNumber >= totalPages && movies.length === 0 && (
+      {pageNumber >= totalPages && filteredMovies.length === 0 && (
         <div className="no-results">
           <p> No movies found </p>
         </div>

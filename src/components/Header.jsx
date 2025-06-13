@@ -12,7 +12,6 @@ export default function Header({
 
   const handleEnter = (event) => {
     if (event.key === "Enter") {
-      console.log("Enter");
       event.preventDefault();
       handleSearch();
     } else if (event.key === "Backspace") {
