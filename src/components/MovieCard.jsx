@@ -51,7 +51,7 @@ export default function MovieCard({
         className="movieImg"
         alt={`Poster for ${title}`}
       />
-      <p id="movieVoteAverage"> Vote average: {voteAverage}</p>
+      <p id="movieVoteAverage"> Vote average: {Math.round(voteAverage * 10) / 10}</p>
       <div>
         <input
           type="checkbox"
